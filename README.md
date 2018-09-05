@@ -1,7 +1,7 @@
 # uetbuildcpp-linux
 Công cụ compile và chạy Java nhanh chóng trên Linux.
 <h3>Hướng dẫn cài đặt</h3>
-Yêu cầu cài đặt trước JDK
+Yêu cầu cài đặt trước JDK<br>
 Chạy dòng lệnh dưới quyền sudo:<br>
  <blockquote>sudo bash /pathto/installuetJavatool.sh</blockquote>
 Hoặc clone repo:<br>
