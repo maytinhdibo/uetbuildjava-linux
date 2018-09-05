@@ -1,4 +1,6 @@
 #!/bin/bash
+
+onefile(){
 filepath=$1
 filename=$(basename "$filepath")
 if [ -z "$2" ]
@@ -19,3 +21,67 @@ fi
 echo 
 echo "----------------------------------"
 echo "Process exited! Done."
+}
+
+multifile(){
+projectpath=$1
+classname=$2
+
+class=$classname
+OIFS="$IFS"
+IFS='.' array=($class)
+IFS="$OIFS"
+pathlength=${#array[*]}
+i=${0}
+
+subpath=""
+
+for (( i=0; i < $pathlength-1; i++ )); do
+ subpath=${subpath}${array[i]}"/";
+done
+cd $projectpath
+echo "----------------------------------"
+
+if [ -z "$2" ]
+then
+    echo "Error: No class input"
+    echo "----------------------------------"
+    exit
+fi
+
+if [ -z "$1" ]
+then
+echo "Error: No file input"
+echo "----------------------------------"
+exit
+fi
+javac -sourcepath . ${subpath}/*.java
+java -classpath . $classname
+
+echo 
+echo "----------------------------------"
+echo "Process exited! Done."
+}
+
+
+while getopts ":fp:" opt; do
+  case $opt in
+    f) 
+     onefile $2 $3
+      ;;
+    p) 
+     multifile $2 $3
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+shift "$(($OPTIND -1))"
+

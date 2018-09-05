@@ -10,10 +10,15 @@ Hoặc clone repo:<br>
  </blockquote>
 <h3>Sử dụng:</h3>
 Chạy sử dụng command "uetjava"
-<br><br>
+<h4>Chạy một file</h4>
 Với class trùng tên file:<br>
-<blockquote>uetjava &lt;filename&gt;</blockquote>
+<blockquote>uetjava -f &lt;filename&gt;</blockquote>
 Với class khác tên file:<br>
-<blockquote>uetjava &lt;filename&gt; &lt;class&gt;</blockquote>
+<blockquote>uetjava -f &lt;filename&gt; &lt;class&gt;</blockquote>
+
+<h4>Chạy một package</h4>
+<blockquote>uetjava -p &lt;package_root_folder&gt; &lt;class&gt;</blockquote>
+Ví dụ: 
+<blockquote>uetjava -p hello/src com.uet.hello.Main</blockquote>
 
 Tác giả: Trần Mạnh Cường - K62-C-CLC UET
