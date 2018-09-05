@@ -1,0 +1,21 @@
+#!/bin/bash
+filepath=$1
+filename=$(basename "$filepath")
+if [ -z "$2" ]
+then
+    filename="${filename%.*}"
+else
+    filename=$2
+fi
+echo "----------------------------------"
+if [ ${#filepath} -eq 0 ]
+then
+echo "Error: No file input"
+else
+javac $filepath
+cd $(dirname "$filepath")
+java $filename
+fi
+echo 
+echo "----------------------------------"
+echo "Process exited! Done."
