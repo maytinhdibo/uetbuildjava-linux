@@ -1,13 +1,21 @@
 #!/bin/bash
 
 onefile(){
-filepath=$1
-filename=$(basename "$filepath")
-if [ -z "$2" ]
+filepath=$2
+classname=$(basename "$filepath")
+if [ -z "$3" ]
 then
-    filename="${filename%.*}"
+    classname="${classname%.*}"
 else
-    filename=$2
+
+if [ $3 = "-a" ]; then
+   args=("${@:4}")   
+   classname="${classname%.*}"
+   else
+       classname=$3
+       args=("${@:5}")  
+fi
+
 fi
 echo "----------------------------------"
 if [ ${#filepath} -eq 0 ]
@@ -16,7 +24,7 @@ echo "Error: No file input"
 else
 javac $filepath
 cd $(dirname "$filepath")
-java $filename
+java $classname $args
 fi
 echo 
 echo "----------------------------------"
@@ -24,8 +32,12 @@ echo "Process exited! Done."
 }
 
 multifile(){
-projectpath=$1
-classname=$2
+if [ $4 = "-a" ]; then
+   args=("${@:5}")   
+fi
+   
+projectpath=$2
+classname=$3
 
 class=$classname
 OIFS="$IFS"
@@ -56,7 +68,7 @@ echo "----------------------------------"
 exit
 fi
 javac -sourcepath . ${subpath}/*.java
-java -classpath . $classname
+java -classpath . $classname  $args
 
 echo 
 echo "----------------------------------"
@@ -64,13 +76,13 @@ echo "Process exited! Done."
 }
 
 
-while getopts ":fp:" opt; do
+while getopts ":fpa:" opt; do
   case $opt in
     f) 
-     onefile $2 $3
+     onefile $@
       ;;
     p) 
-     multifile $2 $3
+     multifile $@
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
