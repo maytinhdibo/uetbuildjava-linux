@@ -21,5 +21,7 @@ Với class khác tên file:<br>
 <blockquote>uetjava -p &lt;package_root_folder&gt; &lt;class&gt;</blockquote>
 Ví dụ: 
 <blockquote>uetjava -p hello/src com.uet.hello.Main</blockquote>
+Sử dụng đối số với <b>-a</b>: 
+<blockquote>uetjava -p hello/src com.uet.hello.Main -a abc xyz</blockquote>
 
 Tác giả: Trần Mạnh Cường - K62-C-CLC UET
